@@ -1,0 +1,40 @@
+CREATE TABLE  student (
+  ID int(2) NOT NULL UNIQUE,
+  Registration_no int(10) NOT NULL UNIQUE,
+  Name varchar(50) NOT NULL ,
+  CSE210 int(3) NOT NULL ,
+  INT424 int(3) NOT NULL,
+  INT214 int(3) NOT NULL,
+  CSE101 int(3) NOT NULL,
+  INT234 int(3) NOT NULL
+);
+
+show tables;
+
+INSERT INTO student (ID,Registration_no, Name,CSE210,INT424,INT214,CSE101,INT234) VALUES
+(1, 11603258,'Ganesh',  85, 56, 85,65,85),
+(2, 11509874,'Shiva',  55, 40, 75,86,91),
+(3, 11325952,'Krishna',  60, 50, 70,92,65),
+(4, 11425896,'Sekhar', 60, 80, 90,44,90),
+(5, 11604258,'Swapna',  55, 90, 80,70,56),
+(6, 11604786,'Srujana',  78, 60, 70,59,87),
+(7, 11301541,'Bhargav',  85, 80, 90,74,76),
+(8, 11602741,'Kushal',  78, 60, 70,65,88),
+(9, 11605258,'Sandeep',  55, 40, 55,68,63),
+(10,11608787,'Raman', 85,86,69,85,67);
+
+SELECT * from student;
+SELECT Registration_no,Name, ((CSE210+INT424+INT214+CSE101+INT234)/(100*5) * 100) AS percentage  FROM student;
+
+
+CREATE TABLE  studentpercentage (
+  s_id int(3) NOT NULL,
+  percentage float(5) NOT NULL
+);
+
+
+insert into studentpercentage(s_id,percentage) select ID, ((CSE210+INT424+INT214+CSE101+INT234)/(100*5) * 100) from student group by ID;
+
+select * from studentpercentage;
+
+SELECT Registration_no, CSE210 ,INT424,INT214,CSE101,INT234,  percentage FROM  student , studentpercentage WHERE ID = s_id;
